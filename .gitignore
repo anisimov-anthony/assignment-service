@@ -1,0 +1,11 @@
+coverage.out
+coverage.html
+*.coverprofile
+
+.env
+.env.local
+.env.*.local
+
+bin
+
+
