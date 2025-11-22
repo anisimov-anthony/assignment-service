@@ -26,7 +26,7 @@ func main() {
 	defer logger.Sync()
 
 	// Config
-	cfg := config.Load()
+	cfg := config.MustLoad(logger)
 	logger.Info("application started", zap.Object("config", cfg))
 
 	// Root context
