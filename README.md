@@ -72,9 +72,9 @@ go run ./cmd/server
 - `POST /team/add` - создание команды
 - `GET /team/get` - получение информации о команде
 - `POST /users/setIsActive` - установка активности пользователя
-- `GET /users/getReview` - получение PR на ревью
+- `GET /users/getReview` - получение PR, на которые назначен пользователь
 - `POST /pullRequest/create` - создание Pull Request
-- `POST /pullRequest/merge` - слияние Pull Request
+- `POST /pullRequest/merge` - установка статуса `MERGED` для Pull Request
 - `POST /pullRequest/reassign` - переназначение ревьювера
 
 ### Дополнительно реализованные эндпоинты
