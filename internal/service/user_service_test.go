@@ -26,8 +26,16 @@ func TestUserServiceSetIsActive(t *testing.T) {
 			IsActive: false,
 		}
 
-		mockUserRepo.On("GetByID", ctx, "user-1").Return(user, nil)
+		updatedUser := &domain.User{
+			UserID:   "user-1",
+			Username: "testuser",
+			TeamName: "team-1",
+			IsActive: true,
+		}
+
+		mockUserRepo.On("GetByID", ctx, "user-1").Return(user, nil).Once()
 		mockUserRepo.On("UpdateIsActive", ctx, "user-1", true).Return(nil)
+		mockUserRepo.On("GetByID", ctx, "user-1").Return(updatedUser, nil).Once()
 
 		result, err := service.SetIsActive(ctx, "user-1", true)
 

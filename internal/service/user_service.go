@@ -22,7 +22,7 @@ func NewUserService(userRepo repository.UserRepository, logger *zap.Logger) *Use
 }
 
 func (s *UserService) SetIsActive(ctx context.Context, userID string, isActive bool) (*domain.User, error) {
-	user, err := s.userRepo.GetByID(ctx, userID)
+	_, err := s.userRepo.GetByID(ctx, userID)
 	if err != nil {
 		return nil, err
 	}
@@ -31,7 +31,11 @@ func (s *UserService) SetIsActive(ctx context.Context, userID string, isActive b
 		return nil, err
 	}
 
-	user.IsActive = isActive
+	user, err := s.userRepo.GetByID(ctx, userID)
+	if err != nil {
+		return nil, err
+	}
+
 	return user, nil
 }
 

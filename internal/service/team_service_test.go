@@ -10,6 +10,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
+	"github.com/stretchr/testify/require"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zaptest"
 )
@@ -78,14 +79,24 @@ func TestTeamServiceGetTeam(t *testing.T) {
 			},
 		}
 
+		users := []*domain.User{
+			{UserID: "user-1", Username: "user1", TeamName: "team-1", IsActive: false}, // actual db data
+		}
+
 		mockTeamRepo.On("GetByName", ctx, "team-1").Return(team, nil)
+		mockUserRepo.On("GetByTeam", ctx, "team-1").Return(users, nil)
 
 		result, err := service.GetTeam(ctx, "team-1")
 
 		assert.NoError(t, err)
 		assert.NotNil(t, result)
 		assert.Equal(t, "team-1", result.TeamName)
+		require.Len(t, result.Members, 1)
+		assert.Equal(t, "user-1", result.Members[0].UserID)
+		assert.Equal(t, "user1", result.Members[0].Username)
+		assert.Equal(t, false, result.Members[0].IsActive) // must be actual status
 		mockTeamRepo.AssertExpectations(t)
+		mockUserRepo.AssertExpectations(t)
 	})
 
 	t.Run("team not found", func(t *testing.T) {

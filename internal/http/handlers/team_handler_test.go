@@ -125,7 +125,12 @@ func TestTeamHandlerGetTeam(t *testing.T) {
 			},
 		}
 
+		users := []*domain.User{
+			{UserID: "user-1", Username: "user1", TeamName: "team-1", IsActive: false},
+		}
+
 		mockTeamRepo.On("GetByName", mock.Anything, "team-1").Return(team, nil)
+		mockUserRepo.On("GetByTeam", mock.Anything, "team-1").Return(users, nil)
 
 		req := httptest.NewRequest(http.MethodGet, "/team/get?team_name=team-1", nil)
 		w := httptest.NewRecorder()
@@ -135,6 +140,7 @@ func TestTeamHandlerGetTeam(t *testing.T) {
 		assert.Equal(t, http.StatusOK, w.Code)
 		assert.Equal(t, "application/json", w.Header().Get("Content-Type"))
 		mockTeamRepo.AssertExpectations(t)
+		mockUserRepo.AssertExpectations(t)
 	})
 
 	t.Run("team not found", func(t *testing.T) {
