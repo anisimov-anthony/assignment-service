@@ -1,0 +1,95 @@
+name: Docker CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  docker-build:
+    name: Docker Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile
+        push: false
+        load: true
+        tags: assignment-service:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+  docker-compose-test:
+    name: Docker Compose Test
+    runs-on: ubuntu-latest
+    needs: docker-build
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build Docker images
+      run: docker-compose build
+
+    - name: Start services
+      run: docker-compose up -d
+
+    - name: Wait for services to be healthy
+      run: |
+        echo "Waiting for MongoDB to be healthy..."
+        timeout 60 bash -c 'until docker-compose exec -T mongodb mongosh --eval "db.adminCommand(\"ping\")" > /dev/null 2>&1; do sleep 2; done'
+        
+        echo "Waiting for API to be healthy..."
+        timeout 60 bash -c 'until curl -f http://localhost:8080/health > /dev/null 2>&1; do sleep 2; done'
+
+    - name: Check service logs
+      run: docker-compose logs
+
+    - name: Test API endpoints
+      run: |
+        # Test health endpoint
+        curl -f http://localhost:8080/health || exit 1
+        
+        # Test that the service is responding
+        curl -f http://localhost:8080/ || exit 1
+
+    - name: Stop services
+      run: docker-compose down
+
+    - name: Cleanup Docker resources
+      run: |
+        docker-compose down -v --remove-orphans
+        docker volume rm assignment-service_mongodb_data 2>/dev/null || true
+        docker system prune -f
+
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    needs: docker-build
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: 'assignment-service:latest'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+
+    - name: Upload Trivy scan results to GitHub Security tab
+      uses: github/codeql-action/upload-sarif@v3
+      if: always()
+      with:
+        sarif_file: 'trivy-results.sarif'
