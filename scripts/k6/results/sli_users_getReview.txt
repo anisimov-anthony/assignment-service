@@ -1,0 +1,29 @@
+     execution: local
+        script: src/scenarios/sli/users_getReview/index.js
+        output: json (k6-results/2025-11-23/sli_users_getReview_results.json)
+
+     scenarios: (100.00%) 1 scenario, 200 max VUs, 1m30s max duration (incl. graceful stop):
+              * sli_get_reviews: 5.00 iterations/s for 1m0s (maxVUs: 1-200, gracefulStop: 30s)
+  
+     ✓ get reviews ok (sli_get_reviews)
+
+     checks.........................: 100.00% 301 out of 301
+     data_received..................: 631 kB  10 kB/s
+     data_sent......................: 90 kB   1.5 kB/s
+     http_req_blocked...............: avg=15.76µs  min=4.3µs    med=8.32µs  max=1.41ms   p(90)=17.82µs  p(95)=22.56µs
+     http_req_connecting............: avg=2.88µs   min=0s       med=0s      max=1.16ms   p(90)=0s       p(95)=0s
+     http_req_duration..............: avg=3.07ms   min=896.92µs med=2.83ms  max=9.6ms    p(90)=4.7ms    p(95)=5.06ms
+       { expected_response:true }...: avg=3.15ms   min=1.31ms   med=2.98ms  max=9.6ms    p(90)=4.71ms   p(95)=5.07ms
+     ✓ { prep:false }...............: avg=3.85ms   min=1.48ms   med=4.14ms  max=9.6ms    p(90)=4.89ms   p(95)=5.31ms
+     http_req_failed................: 3.83%   20 out of 521
+     ✓ { prep:false }...............: 0.00%   0 out of 301
+     http_req_receiving.............: avg=123.03µs min=52.92µs  med=95.64µs max=688.39µs p(90)=193.68µs p(95)=219.62µs
+     http_req_sending...............: avg=40.04µs  min=16.43µs  med=35.9µs  max=345.67µs p(90)=61.4µs   p(95)=76.19µs
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s      max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=2.91ms   min=800.62µs med=2.71ms  max=9.36ms   p(90)=4.46ms   p(95)=4.81ms
+     http_reqs......................: 521     8.607383/s
+     iteration_duration.............: avg=4.34ms   min=1.65ms   med=4.66ms  max=10.25ms  p(90)=5.53ms   p(95)=6.03ms
+     iterations.....................: 301     4.972788/s
+     vus............................: 0       min=0          max=0
+     vus_max........................: 1       min=1          max=1
+

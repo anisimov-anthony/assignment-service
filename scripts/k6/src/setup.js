@@ -5,7 +5,6 @@ import { BASE_URL } from './helpers.js';
 const teamsData = JSON.parse(open('../data/teams.json'));
 
 export function setup() {
-  console.log("Starting data seeding...");
 
   teamsData.forEach(team => {
     const payload = JSON.stringify({
@@ -35,7 +34,6 @@ export function setup() {
     check(res, { 'team created': (r) => false });
   });
 
-  return { message: "Data seeding completed" };
 }
 
 import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js";

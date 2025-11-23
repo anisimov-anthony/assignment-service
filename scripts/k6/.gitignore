@@ -1,0 +1,6 @@
+k6-results/
+*.html
+*.json
+
+*.tmp
+*.log

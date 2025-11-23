@@ -1,0 +1,30 @@
+     execution: local
+        script: src/scenarios/1k/pullRequest_create/index.js
+        output: json (k6-results/2025-11-23/1k_pr_create_results.json)
+
+     scenarios: (100.00%) 1 scenario, 20000 max VUs, 1m30s max duration (incl. graceful stop):
+              * sli_pr_create: 1000.00 iterations/s for 1m0s (maxVUs: 1-20000, gracefulStop: 30s)
+
+
+     ✓ PR created ok (sli_pr_create)
+
+     checks.........................: 100.00% 56963 out of 56963
+     data_received..................: 18 MB   295 kB/s
+     data_sent......................: 14 MB   230 kB/s
+     dropped_iterations.............: 3038    50.593367/s
+     http_req_blocked...............: avg=92.72µs min=2.26µs   med=7.23µs  max=243.07ms p(90)=10.11µs  p(95)=14.47µs
+     http_req_connecting............: avg=36.43µs min=0s       med=0s      max=157.03ms p(90)=0s       p(95)=0s
+     http_req_duration..............: avg=74.17ms min=867.84µs med=40.2ms  max=853.13ms p(90)=193.44ms p(95)=244.98ms
+       { expected_response:true }...: avg=74.2ms  min=2.39ms   med=40.25ms max=853.13ms p(90)=193.49ms p(95)=245.05ms
+     ✓ { prep:false }...............: avg=74.2ms  min=1.39ms   med=40.23ms max=853.13ms p(90)=193.46ms p(95)=245.04ms
+     http_req_failed................: 0.06%   36 out of 56983
+     ✓ { prep:false }...............: 0.02%   16 out of 56963
+     http_req_receiving.............: avg=1.11ms  min=12.71µs  med=46.49µs max=626.41ms p(90)=393.85µs p(95)=1.03ms
+     http_req_sending...............: avg=4.08ms  min=7.82µs   med=28.38µs max=746.88ms p(90)=1.54ms   p(95)=15.76ms
+     http_req_tls_handshaking.......: avg=0s      min=0s       med=0s      max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=68.97ms min=791.03µs med=35.92ms max=559.03ms p(90)=182.45ms p(95)=234.75ms
+     http_reqs......................: 56983   948.967021/s
+     iteration_duration.............: avg=77.22ms min=1.7ms    med=42.9ms  max=853.5ms  p(90)=199.58ms p(95)=251.67ms
+     iterations.....................: 56963   948.63395/s
+     vus............................: 12      min=4              max=268
+     vus_max........................: 303     min=25             max=303

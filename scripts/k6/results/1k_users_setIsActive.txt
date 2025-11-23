@@ -1,0 +1,30 @@
+     execution: local
+        script: src/scenarios/1k/users_setIsActive/index.js
+        output: json (k6-results/2025-11-23/1k_users_setIsActive_results.json)
+
+     scenarios: (100.00%) 1 scenario, 20000 max VUs, 1m30s max duration (incl. graceful stop):
+              * sli_user_set_active: 1000.00 iterations/s for 1m0s (maxVUs: 1-20000, gracefulStop: 30s)
+
+
+     ✓ set active ok (sli_user_set_active)
+
+     checks.........................: 100.00% 59850 out of 59850
+     data_received..................: 13 MB   218 kB/s
+     data_sent......................: 11 MB   185 kB/s
+     dropped_iterations.............: 151     2.514974/s
+     http_req_blocked...............: avg=10.34µs  min=2.12µs   med=6.44µs  max=19.18ms  p(90)=8.47µs   p(95)=9.85µs
+     http_req_connecting............: avg=460ns    min=0s       med=0s      max=3.07ms   p(90)=0s       p(95)=0s
+     http_req_duration..............: avg=4.35ms   min=994.4µs  med=2.67ms  max=105.51ms p(90)=8.02ms   p(95)=11.94ms
+       { expected_response:true }...: avg=4.35ms   min=1.5ms    med=2.67ms  max=105.51ms p(90)=8.02ms   p(95)=11.94ms
+     ✓ { prep:false }...............: avg=4.35ms   min=1.5ms    med=2.67ms  max=105.51ms p(90)=8.02ms   p(95)=11.94ms
+     http_req_failed................: 0.03%   20 out of 59870
+     ✓ { prep:false }...............: 0.00%   0 out of 59850
+     http_req_receiving.............: avg=110.76µs min=12.87µs  med=63.31µs max=38.7ms   p(90)=202.04µs p(95)=344.02µs
+     http_req_sending...............: avg=59.85µs  min=8.03µs   med=24.82µs max=17.23ms  p(90)=54.96µs  p(95)=152.07µs
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s      max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=4.18ms   min=909.85µs med=2.54ms  max=105.43ms p(90)=7.76ms   p(95)=11.59ms
+     http_reqs......................: 59870   997.162377/s
+     iteration_duration.............: avg=4.66ms   min=1.66ms   med=2.94ms  max=105.78ms p(90)=8.46ms   p(95)=12.43ms
+     iterations.....................: 59850   996.829267/s
+     vus............................: 7       min=0              max=25
+     vus_max........................: 46      min=10             max=46

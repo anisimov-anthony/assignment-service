@@ -1,0 +1,29 @@
+     execution: local
+        script: src/scenarios/1k/users_getReview/index.js
+        output: json (k6-results/2025-11-23/1k_users_getReview_results.json)
+
+     scenarios: (100.00%) 1 scenario, 20000 max VUs, 1m30s max duration (incl. graceful stop):
+              * sli_get_reviews: 1000.00 iterations/s for 1m0s (maxVUs: 1-20000, gracefulStop: 30s)
+       ✗ get reviews ok (sli_get_reviews)
+      ↳  26% — ✓ 4523 / ✗ 12790
+
+     checks.........................: 26.12% 4523 out of 17313
+     data_received..................: 318 MB 3.5 MB/s
+     data_sent......................: 2.1 MB 24 kB/s
+     dropped_iterations.............: 42676  472.015338/s
+     http_req_blocked...............: avg=4.28ms min=3.02µs   med=368.81µs max=356.39ms p(90)=5.42ms   p(95)=17.67ms
+     http_req_connecting............: avg=2.28ms min=0s       med=172.54µs max=281.27ms p(90)=2.12ms   p(95)=8.17ms
+     http_req_duration..............: avg=23.39s min=899.76µs med=29.44s   max=55.12s   p(90)=36s      p(95)=46.63s
+       { expected_response:true }...: avg=4.95s  min=1.35ms   med=5.1s     max=10.55s   p(90)=9.05s    p(95)=9.44s
+     ✗ { prep:false }...............: avg=23.68s min=4.66ms   med=29.6s    max=55.12s   p(90)=36.75s   p(95)=46.69s
+     http_req_failed................: 73.06% 12810 out of 17533
+     ✗ { prep:false }...............: 73.87% 12790 out of 17313
+     http_req_receiving.............: avg=1.98ms min=0s       med=0s       max=362.5ms  p(90)=512.81µs p(95)=1.91ms
+     http_req_sending...............: avg=1.84s  min=8.05µs   med=65.01µs  max=22.08s   p(90)=11.77s   p(95)=16.98s
+     http_req_tls_handshaking.......: avg=0s     min=0s       med=0s       max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=21.54s min=822.67µs med=27.15s   max=34.61s   p(90)=32.22s   p(95)=32.93s
+     http_reqs......................: 17533  193.922695/s
+     iteration_duration.............: avg=23.69s min=5.39ms   med=29.6s    max=55.12s   p(90)=36.78s   p(95)=46.69s
+     iterations.....................: 17313  191.489398/s
+     vus............................: 116    min=115            max=8420
+     vus_max........................: 8449   min=117            max=8449

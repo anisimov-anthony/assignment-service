@@ -1,0 +1,30 @@
+     execution: local
+        script: src/scenarios/1k/pullRequest_reassign/index.js
+        output: json (k6-results/2025-11-23/1k_pr_reassign_results.json)
+
+     scenarios: (100.00%) 1 scenario, 20000 max VUs, 1m30s max duration (incl. graceful stop):
+              * sli_reassign: 1000.00 iterations/s for 1m0s (maxVUs: 1-20000, gracefulStop: 30s)
+  
+     ✓ reassign ok (sli_reassign)
+
+     checks.........................: 100.00% 36388 out of 36388
+     data_received..................: 63 MB   988 kB/s
+     data_sent......................: 17 MB   269 kB/s
+     dropped_iterations.............: 23572   371.883551/s
+     http_req_blocked...............: avg=636.16µs min=1.85µs   med=5.89µs   max=696.35ms p(90)=10.23µs  p(95)=18.79µs
+     http_req_connecting............: avg=540.6µs  min=0s       med=0s       max=696.27ms p(90)=0s       p(95)=0s
+     http_req_duration..............: avg=238.02ms min=931.24µs med=214.03ms max=2.17s    p(90)=437.04ms p(95)=508.36ms
+       { expected_response:true }...: avg=255.53ms min=1.33ms   med=239.84ms max=2.17s    p(90)=456.76ms p(95)=526.56ms
+     ✗ { prep:false }...............: avg=240.65ms min=1.31ms   med=216.24ms max=2.17s    p(90)=438.27ms p(95)=509.33ms
+     http_req_failed................: 31.56%  34841 out of 110383
+     ✗ { prep:false }...............: 31.91%  34840 out of 109164
+     http_req_receiving.............: avg=1.92ms   min=13.21µs  med=40.64µs  max=658.35ms p(90)=207.45µs p(95)=845.75µs
+     http_req_sending...............: avg=4.61ms   min=5.43µs   med=19µs     max=563.31ms p(90)=230.59µs p(95)=14.52ms
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=231.48ms min=849.49µs med=208.4ms  max=2.17s    p(90)=424.91ms p(95)=492.2ms
+     http_reqs......................: 110383  1741.456896/s
+     iteration_duration.............: avg=739.29ms min=15.24ms  med=715.25ms max=4.5s     p(90)=1.22s    p(95)=1.37s
+     iterations.....................: 36388   574.075116/s
+     vus............................: 0       min=0               max=821
+     vus_max........................: 838     min=1               max=838
+

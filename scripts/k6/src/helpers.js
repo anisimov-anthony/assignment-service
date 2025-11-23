@@ -2,7 +2,7 @@ import { randomItem, randomString } from 'https://jslib.k6.io/k6-utils/1.4.0/ind
 
 export { randomItem, randomString };
 
-export const BASE_URL = __ENV.BASE_URL || "http://localhost:8080";
+export const BASE_URL = "http://localhost:8080";
 
 const rawTeamsData = open('../data/teams.json');
 export const teams = JSON.parse(rawTeamsData);
