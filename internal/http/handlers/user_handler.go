@@ -80,9 +80,9 @@ func (h *UserHandler) GetReview(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	shortPRs := make([]domain.PullRequest, 0, len(prs))
+	shortPRs := make([]domain.PullRequestShort, 0, len(prs))
 	for _, pr := range prs {
-		shortPRs = append(shortPRs, domain.PullRequest{
+		shortPRs = append(shortPRs, domain.PullRequestShort{
 			PullRequestID:   pr.PullRequestID,
 			PullRequestName: pr.PullRequestName,
 			AuthorID:        pr.AuthorID,

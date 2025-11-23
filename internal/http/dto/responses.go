@@ -29,6 +29,6 @@ type ReassignResponse struct {
 }
 
 type GetReviewResponse struct {
-	UserID       string               `json:"user_id"`
-	PullRequests []domain.PullRequest `json:"pull_requests"`
+	UserID       string                    `json:"user_id"`
+	PullRequests []domain.PullRequestShort `json:"pull_requests"`
 }

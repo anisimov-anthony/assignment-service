@@ -9,11 +9,13 @@ import (
 	"time"
 
 	"assignment-service/internal/domain"
+	"assignment-service/internal/http/dto"
 	"assignment-service/internal/repository/mocks"
 	"assignment-service/internal/service"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
+	"github.com/stretchr/testify/require"
 	"go.uber.org/zap"
 )
 
@@ -141,6 +143,17 @@ func TestUserHandlerGetReview(t *testing.T) {
 
 		assert.Equal(t, http.StatusOK, w.Code)
 		assert.Equal(t, "application/json", w.Header().Get("Content-Type"))
+
+		var response dto.GetReviewResponse
+		err := json.NewDecoder(w.Body).Decode(&response)
+		require.NoError(t, err)
+		assert.Equal(t, "user-1", response.UserID)
+		require.Len(t, response.PullRequests, 1)
+		assert.Equal(t, "pr-1", response.PullRequests[0].PullRequestID)
+		assert.Equal(t, "PR 1", response.PullRequests[0].PullRequestName)
+		assert.Equal(t, "author-1", response.PullRequests[0].AuthorID)
+		assert.Equal(t, domain.PRStatusOpen, response.PullRequests[0].Status)
+
 		mockUserRepo.AssertExpectations(t)
 		mockPRRepo.AssertExpectations(t)
 	})
